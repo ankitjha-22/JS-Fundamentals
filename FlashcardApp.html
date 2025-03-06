@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Flashcard App</title>
+  </head>
+  <body>
+    <h1>Flashcard App</h1>
+    <input type="text" id="question" placeholder="Question" />
+    <input type="text" id="answer" placeholder="Answer" />
+    <button onclick="addFlashcard()">Add Flashcard</button>
+    <button onclick="showFlashcards()">Show Flashcards</button>
+    <div id="flashcards"></div>
+
+    <script>
+      let flashcards = [];
+
+      function addFlashcard() {
+        const question = document.getElementById("question").value;
+        const answer = document.getElementById("answer").value;
+        if (question && answer) {
+          flashcards.push({ question, answer });
+          document.getElementById("question").value = "";
+          document.getElementById("answer").value = "";
+        }
+      }
+
+      function showFlashcards() {
+        const flashcardsDiv = document.getElementById("flashcards");
+        flashcardsDiv.innerHTML = "";
+        flashcards.forEach((flashcard) => {
+          const div = document.createElement("div");
+          div.innerHTML = `<strong>Q:</strong> ${flashcard.question} <br> <strong>A:</strong> ${flashcard.answer}`;
+          flashcardsDiv.appendChild(div);
+        });
+      }
+    </script>
+  </body>
+</html>

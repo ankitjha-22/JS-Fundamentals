@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Joke Generator</title>
+  </head>
+  <body>
+    <h1>Random Joke Generator</h1>
+    <button onclick="getJoke()">Get Joke</button>
+    <div id="joke"></div>
+
+    <script>
+      async function getJoke() {
+        const response = await fetch(
+          "https://official-joke-api.appspot.com/random_joke"
+        );
+        const data = await response.json();
+        document.getElementById(
+          "joke"
+        ).innerHTML = `${data.setup} <br> ${data.punchline}`;
+      }
+    </script>
+  </body>
+</html>

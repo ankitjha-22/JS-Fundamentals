@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Expense Tracker</title>
+  </head>
+  <body>
+    <h1>Expense Tracker</h1>
+    <input type="text" id="expense-name" placeholder="Expense name" />
+    <input type="number" id="expense-amount" placeholder="Amount" />
+    <button onclick="addExpense()">Add Expense</button>
+    <ul id="expense-list"></ul>
+    <div id="total-expenses"></div>
+
+    <script>
+      let expenses = [];
+
+      function addExpense() {
+        const name = document.getElementById("expense-name").value;
+        const amount = parseFloat(
+          document.getElementById("expense-amount").value
+        );
+        if (name && amount) {
+          expenses.push({ name, amount });
+          displayExpenses();
+          updateTotal();
+        }
+      }
+
+      function displayExpenses() {
+        const list = document.getElementById("expense-list");
+        list.innerHTML = "";
+        expenses.forEach((expense) => {
+          const li = document.createElement("li");
+          li.textContent = `${expense.name}: $${expense.amount}`;
+          list.appendChild(li);
+        });
+      }
+
+      function updateTotal() {
+        const total = expenses.reduce(
+          (sum, expense) => sum + expense.amount,
+          0
+        );
+        document.getElementById(
+          "total-expenses"
+        ).innerText = `Total: $${total}`;
+      }
+    </script>
+  </body>
+</html>

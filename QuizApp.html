@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quiz App</title>
+  </head>
+  <body>
+    <h1>Quiz App</h1>
+    <div id="question-container">
+      <h2>Question: <span id="question"></span></h2>
+      <ul id="options"></ul>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+    <div id="score"></div>
+
+    <script>
+      const questions = [
+        { question: "What is 2 + 2?", options: ["3", "4", "5"], answer: "4" },
+        { question: "What is 3 + 5?", options: ["5", "8", "7"], answer: "8" },
+      ];
+      let currentQuestionIndex = 0;
+      let score = 0;
+
+      function displayQuestion() {
+        const q = questions[currentQuestionIndex];
+        document.getElementById("question").innerText = q.question;
+        const options = document.getElementById("options");
+        options.innerHTML = "";
+        q.options.forEach((option) => {
+          const li = document.createElement("li");
+          li.innerText = option;
+          li.onclick = () => checkAnswer(option);
+          options.appendChild(li);
+        });
+      }
+
+      function checkAnswer(option) {
+        if (option === questions[currentQuestionIndex].answer) {
+          score++;
+        }
+        document.getElementById("score").innerText = `Score: ${score}`;
+      }
+
+      function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+          displayQuestion();
+        } else {
+          alert("Quiz completed!");
+        }
+      }
+
+      displayQuestion();
+    </script>
+  </body>
+</html>
